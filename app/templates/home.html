@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block content %}
+<h1>{{ title }}</h1>
+<p>Manage your authors and books.</p>
+<p>
+  <a href="{{ url_for('web_bp.list_authors') }}" class="button">View Authors</a>
+  |
+  <a href="{{ url_for('web_bp.list_books') }}" class="button">View Books</a>
+</p>
+<p>
+  You can also interact with the
+  <a href="{{ url_for('api_bp.get_authors_api') }}">Authors API</a> or the
+  <a href="{{ url_for('api_bp.get_books_api') }}">Books API</a>.
+</p>
+{% endblock %}

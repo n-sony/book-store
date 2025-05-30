@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block content %}
+<h2>{{ author.name }}</h2>
+<div class="detail-item"><strong>ID:</strong> {{ author.id }}</div>
+{% if author.bio %}
+<div class="detail-item">
+  <strong>Bio:</strong>
+  <p style="white-space: pre-wrap">{{ author.bio }}</p>
+</div>
+{% endif %}
+
+<h3>Books by {{ author.name }}</h3>
+{% if author.books %}
+<ul>
+  {% for book in author.books %}
+  <li>
+    <a href="{{ url_for('web_bp.book_detail', book_id=book.id) }}"
+      >{{ book.title }}</a
+    >
+  </li>
+  {% else %}
+  <p>No books found for this author.</p>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No books found for this author.</p>
+{% endif %}
+
+<div class="actions" style="margin-top: 20px">
+  <a
+    href="{{ url_for('web_bp.edit_author', author_id=author.id) }}"
+    class="edit"
+    >Edit Author</a
+  >
+  <a href="{{ url_for('web_bp.list_authors') }}">Back to Authors List</a>
+</div>
+{% endblock %}

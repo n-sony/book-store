@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %}
+<h2>{{ title }}</h2>
+<form method="POST" action="{{ form_action }}">
+  <div>
+    <label for="name">Name:</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      value="{{ author.name if author else '' }}"
+      required
+    />
+  </div>
+  <div>
+    <label for="bio">Bio (Optional):</label>
+    <textarea id="bio" name="bio" rows="5">
+{{ author.bio if author and author.bio is not none else '' }}</textarea
+    >
+  </div>
+  <div>
+    <button type="submit">
+      {% if author %}Update{% else %}Create{% endif %} Author
+    </button>
+    <a href="{{ url_for('web_bp.list_authors') }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}
