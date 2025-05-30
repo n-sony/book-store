@@ -5,7 +5,7 @@
 to install dependencies use this command
 
 ```sh
-pip install -r requirement
+pip install -r ./requirement.txt
 ```
 
 ## Create database
