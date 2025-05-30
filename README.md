@@ -13,3 +13,9 @@ pip install -r requirement
 ## Create migration
 
 ## Run the application
+
+To run the app use this command
+
+```sh
+python run.py
+```
