@@ -16,9 +16,8 @@ class AuthorService:
         if Author.query.filter_by(name=name).first():
             raise ValueError(f"Author with name '{name}' already exists.")
         new_author = Author(name=name, bio=bio)
-        db.session.add(new_author)
-        db.session.commit()
-        return new_author
+
+        return new_author.create()
 
     @staticmethod
     def update_author(author_id, name=None, bio=None):

@@ -15,6 +15,11 @@ class Book(db.Model):
     def __repr__(self):
         return f"<Book {self.title}>"
 
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+        return self
+
     def to_dict(self):
         return {
             "id": self.id,

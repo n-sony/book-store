@@ -12,6 +12,11 @@ class Author(db.Model):
         "Book", backref="author", lazy=True, cascade="all, delete-orphan"
     )
 
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+        return self
+
     def __repr__(self):
         return f"<Author {self.name}>"
 

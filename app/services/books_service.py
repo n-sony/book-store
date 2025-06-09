@@ -27,9 +27,8 @@ class BookService:
             publication_year=publication_year,
             price=price,
         )
-        db.session.add(new_book)
-        db.session.commit()
-        return new_book
+
+        return new_book.create()
 
     @staticmethod
     def update_book(
