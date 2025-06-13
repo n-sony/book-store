@@ -1,11 +1,13 @@
 from flask import Blueprint, jsonify, request
 
+from app.core.decorators.auth_decorator import token_required
 from app.services.books_service import BookService
 
 api_book_bp = Blueprint("api_book_bp", __name__)
 
 
 @api_book_bp.route("", methods=["POST"])
+@token_required
 def create_book_api():
     data = request.get_json()
     required_fields = ["title", "author_id"]
@@ -39,6 +41,7 @@ def get_book_api(book_id):
 
 
 @api_book_bp.route("<int:book_id>", methods=["PUT"])
+@token_required
 def update_book_api(book_id):
     data = request.get_json()
     try:
@@ -58,6 +61,7 @@ def update_book_api(book_id):
 
 
 @api_book_bp.route("<int:book_id>", methods=["DELETE"])
+@token_required
 def delete_book_api(book_id):
     if BookService.delete_book(book_id):
         return jsonify({"message": "Book deleted successfully"}), 200

@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block content %}
+<h2>{{ title }}</h2>
+<form method="POST" action="{{ url_for('web_auth_bp.register') }}">
+  <div>
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" required />
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required />
+  </div>
+  <button type="submit">Register</button>
+</form>
+<p>
+  Already have an account?
+  <a href="{{ url_for('web_auth_bp.login') }}">Login here</a>.
+</p>
+{% endblock %}

@@ -1,14 +1,16 @@
 {% extends "base.html" %} {% block content %}
 <h2>{{ title }}</h2>
 <p>
-  <a href="{{ url_for('web_bp.new_book') }}" class="button-add">Add New Book</a>
+  <a href="{{ url_for('web_books_bp.new_book') }}" class="button-add"
+    >Add New Book</a
+  >
 </p>
 {% if books %}
 <ul>
   {% for book in books %}
   <li>
     <strong
-      ><a href="{{ url_for('web_bp.book_detail', book_id=book.id) }}"
+      ><a href="{{ url_for('web_books_bp.book_detail', book_id=book.id) }}"
         >{{ book.title }}</a
       ></strong
     >
@@ -17,11 +19,13 @@
     <p>ISBN: {{ book.isbn }}</p>
     {% endif %}
     <div class="actions">
-      <a href="{{ url_for('web_bp.edit_book', book_id=book.id) }}" class="edit"
+      <a
+        href="{{ url_for('web_books_bp.edit_book', book_id=book.id) }}"
+        class="edit"
         >Edit</a
       >
       <form
-        action="{{ url_for('web_bp.delete_book', book_id=book.id) }}"
+        action="{{ url_for('web_books_bp.delete_book', book_id=book.id) }}"
         method="post"
         style="display: inline"
       >
@@ -38,5 +42,7 @@
   {% endfor %}
 </ul>
 {% else %}
-<p>No books found. <a href="{{ url_for('web_bp.new_book') }}">Add one?</a></p>
+<p>
+  No books found. <a href="{{ url_for('web_books_bp.new_book') }}">Add one?</a>
+</p>
 {% endif %} {% endblock %}

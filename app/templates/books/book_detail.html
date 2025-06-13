@@ -4,7 +4,8 @@
 {% if book.author %}
 <div class="detail-item">
   <strong>Author:</strong>
-  <a href="{{ url_for('web_bp.author_detail', author_id=book.author.id) }}"
+  <a
+    href="{{ url_for('web_books_bp.author_detail', author_id=book.author.id) }}"
     >{{ book.author.name }}</a
   >
 </div>
@@ -20,9 +21,11 @@
 </div>
 {% endif %}
 <div class="actions" style="margin-top: 20px">
-  <a href="{{ url_for('web_bp.edit_book', book_id=book.id) }}" class="edit"
+  <a
+    href="{{ url_for('web_books_bp.edit_book', book_id=book.id) }}"
+    class="edit"
     >Edit Book</a
   >
-  <a href="{{ url_for('web_bp.list_books') }}">Back to Books List</a>
+  <a href="{{ url_for('web_books_bp.list_books') }}">Back to Books List</a>
 </div>
 {% endblock %}

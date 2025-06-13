@@ -4,7 +4,15 @@ from config import config_by_name, is_dev
 
 from .core.db_init import db, migrate
 from .core.jwt_init import jwt_manager
-from .routes import author_api_routes, book_api_routes, user_api_routes, web_routes
+from .routes import (
+    auth_api_routes,
+    auth_web_routes,
+    author_api_routes,
+    author_web_routes,
+    book_api_routes,
+    book_web_routes,
+    home_web_routes,
+)
 
 
 def create_app(config_name: str) -> Flask:
@@ -23,10 +31,13 @@ def create_app(config_name: str) -> Flask:
             author_api_routes.api_author_bp, url_prefix="/api/v1/authors/"
         )
         app.register_blueprint(book_api_routes.api_book_bp, url_prefix="/api/v1/books/")
-        app.register_blueprint(user_api_routes.api_user_bp, url_prefix="/api/v1/users/")
-        app.register_blueprint(web_routes.web_bp)
+        app.register_blueprint(auth_api_routes.api_auth_bp, url_prefix="/api/v1/auth/")
+        app.register_blueprint(author_web_routes.web_authors_bp, url_prefix="authors")
+        app.register_blueprint(book_web_routes, url_prefix="books")
+        app.register_blueprint(auth_web_routes, url_prefix="auth")
+        app.register_blueprint(home_web_routes)
 
-        if is_dev:
+        if is_dev():
             db.create_all()
 
         return app

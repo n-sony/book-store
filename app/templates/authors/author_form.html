@@ -21,7 +21,7 @@
     <button type="submit">
       {% if author %}Update{% else %}Create{% endif %} Author
     </button>
-    <a href="{{ url_for('web_bp.list_authors') }}">Cancel</a>
+    <a href="{{ url_for('web_authors_bp.list_authors') }}">Cancel</a>
   </div>
 </form>
 {% endblock %}

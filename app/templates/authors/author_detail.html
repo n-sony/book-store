@@ -13,7 +13,7 @@
 <ul>
   {% for book in author.books %}
   <li>
-    <a href="{{ url_for('web_bp.book_detail', book_id=book.id) }}"
+    <a href="{{ url_for('web_books_bp.book_detail', book_id=book.id) }}"
       >{{ book.title }}</a
     >
   </li>
@@ -27,10 +27,12 @@
 
 <div class="actions" style="margin-top: 20px">
   <a
-    href="{{ url_for('web_bp.edit_author', author_id=author.id) }}"
+    href="{{ url_for('web_authors_bp.edit_author', author_id=author.id) }}"
     class="edit"
     >Edit Author</a
   >
-  <a href="{{ url_for('web_bp.list_authors') }}">Back to Authors List</a>
+  <a href="{{ url_for('web_authors_bp.list_authors') }}"
+    >Back to Authors List</a
+  >
 </div>
 {% endblock %}

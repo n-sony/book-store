@@ -133,9 +133,20 @@
   </head>
   <body>
     <nav>
-      <a href="{{ url_for('web_bp.home') }}">Home</a>
-      <a href="{{ url_for('web_bp.list_authors') }}">Authors</a>
-      <a href="{{ url_for('web_bp.list_books') }}">Books</a>
+      <a href="{{ url_for('web_home_bp.home') }}">Home</a>
+      <a href="{{ url_for('web_authors_bp.list_authors') }}">Authors</a>
+      <a href="{{ url_for('web_books_bp.list_books') }}">Books</a>
+      <div style="float: right">
+        {% if g.user %}
+        <span style="color: white; margin-right: 15px"
+          >Hello, {{ g.user.username }} ({{ g.user.role.name }})</span
+        >
+        <a href="{{ url_for('web_auth_bp.logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('web_auth_bp.login') }}">Login</a>
+        <a href="{{ url_for('web_auth_bp.register') }}">Register</a>
+        {% endif %}
+      </div>
     </nav>
     <div class="container">
       {% with messages = get_flashed_messages(with_categories=true) %} {% if

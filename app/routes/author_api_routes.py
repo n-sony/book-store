@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 
+from app.core.decorators.auth_decorator import token_required
 from app.services.authors_service import AuthorService
 from app.services.books_service import BookService
 
@@ -7,6 +8,7 @@ api_author_bp = Blueprint("api_author_bp", __name__)
 
 
 @api_author_bp.route("", methods=["POST"])
+@token_required
 def create_author_api():
     data = request.get_json()
     if not data or not data.get("name"):
@@ -33,6 +35,7 @@ def get_author_api(author_id):
 
 
 @api_author_bp.route("<int:author_id>", methods=["PUT"])
+@token_required
 def update_author_api(author_id):
     data = request.get_json()
     try:
@@ -47,6 +50,7 @@ def update_author_api(author_id):
 
 
 @api_author_bp.route("<int:author_id>", methods=["DELETE"])
+@token_required
 def delete_author_api(author_id):
     if AuthorService.delete_author(author_id):
         return jsonify({"message": "Author deleted successfully"}), 200

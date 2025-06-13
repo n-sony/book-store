@@ -1,4 +1,9 @@
+from typing import List
+
+from sqlalchemy.orm import Mapped
+
 from app import db
+from app.models.books import Book
 
 
 class Author(db.Model):
@@ -8,7 +13,7 @@ class Author(db.Model):
     name = db.Column(db.String(100), nullable=False, unique=True)
     bio = db.Column(db.Text, nullable=True)
 
-    books = db.relationship(
+    books: Mapped[List["Book"]] = db.relationship(
         "Book", backref="author", lazy=True, cascade="all, delete-orphan"
     )
 

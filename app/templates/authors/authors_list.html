@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <h2>{{ title }}</h2>
 <p>
-  <a href="{{ url_for('web_bp.new_author') }}" class="button-add"
+  <a href="{{ url_for('web_authors_bp.new_author') }}" class="button-add"
     >Add New Author</a
   >
 </p>
@@ -10,7 +10,8 @@
   {% for author in authors %}
   <li>
     <strong
-      ><a href="{{ url_for('web_bp.author_detail', author_id=author.id) }}"
+      ><a
+        href="{{ url_for('web_authors_bp.author_detail', author_id=author.id) }}"
         >{{ author.name }}</a
       ></strong
     >
@@ -19,12 +20,12 @@
     {% endif %}
     <div class="actions">
       <a
-        href="{{ url_for('web_bp.edit_author', author_id=author.id) }}"
+        href="{{ url_for('web_authors_bp.edit_author', author_id=author.id) }}"
         class="edit"
         >Edit</a
       >
       <form
-        action="{{ url_for('web_bp.delete_author', author_id=author.id) }}"
+        action="{{ url_for('web_authors_bp.delete_author', author_id=author.id) }}"
         method="post"
         style="display: inline"
       >
@@ -42,6 +43,7 @@
 </ul>
 {% else %}
 <p>
-  No authors found. <a href="{{ url_for('web_bp.new_author') }}">Add one?</a>
+  No authors found.
+  <a href="{{ url_for('web_authors_bp.new_author') }}">Add one?</a>
 </p>
 {% endif %} {% endblock %}

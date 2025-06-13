@@ -1,5 +1,6 @@
 import logging
 import os
+from datetime import timedelta
 
 from dotenv import load_dotenv
 
@@ -31,12 +32,14 @@ class Config:
         DATABASE_START_STRING = database_string(os.environ.get("DB_TYPE"))
         SQLALCHEMY_DATABASE_URI = f"{DATABASE_START_STRING}{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_HOST')}:{os.environ.get('DB_PORT')}/{os.environ.get('DB_NAME')}"
         SQLALCHEMY_TRACK_MODIFICATIONS = False
+        JWT_EXPIRATION_DELTA = timedelta(hours=1)
     except DatabaseTypeException as e:
         logging.debug("Invalid database type")
         raise e
 
 
 class DevelopmentConfig(Config):
+    SQLALCHEMY_ECHO = False
     DEBUG = True
 
 

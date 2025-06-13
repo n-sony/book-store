@@ -32,7 +32,7 @@
     </div>
     <div>
         <button type="submit">{% if book %}Update{% else %}Create{% endif %} Book</button>
-        <a href="{{ url_for('web_bp.list_books') }}">Cancel</a>
+        <a href="{{ url_for('web_books_bp.list_books') }}">Cancel</a>
     </div>
 </form>
 {% endblock %}
