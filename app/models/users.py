@@ -14,10 +14,25 @@ class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-
     def __repr__(self):
         return f"<Role {self.name}>"
+
+
+roles_users = db.Table(
+    "roles_users",
+    db.Column(
+        "user_id",
+        db.Integer(),
+        db.ForeignKey("users.id", ondelete="CASCADE"),
+        primary_key=True,
+    ),
+    db.Column(
+        "role_id",
+        db.Integer(),
+        db.ForeignKey("roles.id", ondelete="CASCADE"),
+        primary_key=True,
+    ),
+)
 
 
 class User(db.Model):
@@ -28,7 +43,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128), nullable=False)
 
     roles: Mapped[List["Role"]] = db.relationship(
-        "Role", backref="role", lazy=True, cascade="all, delete-orphan"
+        "Role", secondary=roles_users, backref=db.backref("users", lazy="dynamic")
     )
 
     def set_password(self, password):
@@ -56,5 +71,5 @@ class User(db.Model):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "role": self.role.name if self.role else None,
+            "roles": [role.name for role in self.roles],
         }

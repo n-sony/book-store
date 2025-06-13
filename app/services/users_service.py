@@ -90,7 +90,7 @@ class UserService:
         user.remove_role(role)
 
         db.session.commit()
-        return user
+        return user.to_dict()
 
     @staticmethod
     def update_password(
@@ -110,7 +110,7 @@ class UserService:
             raise ValueError("Wrong password")
 
         db.session.commit()
-        return user
+        return user.to_dict()
 
     @staticmethod
     def delete_user(user_id):
@@ -130,7 +130,7 @@ class UserService:
         if current_user.check_password(password):
             access_token = create_access_token(identity=username)
             return {
-                "current_user": current_user.id,
+                "current_user": current_user.to_dict(),
                 "access_token": access_token,
                 "message": "Login with success",
             }

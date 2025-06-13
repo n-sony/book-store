@@ -40,4 +40,12 @@ def create_app(config_name: str) -> Flask:
         if is_dev():
             db.create_all()
 
+        from .seeds.roles import seed_roles
+
+        @app.cli.command("seed-db")
+        def seed_db_command():
+            """Seeds the database with initial data (e.g., roles)."""
+            seed_roles()
+            print("Database seeding process finished.")
+
         return app

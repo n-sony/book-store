@@ -6,12 +6,6 @@ web_authors_bp = Blueprint("web_authors_bp", __name__, template_folder="../templ
 
 
 @web_authors_bp.route("")
-def home():
-    return render_template("home.html", title="Welcome to the BookShop")
-
-
-# --- Author Web Routes ---
-@web_authors_bp.route("")
 def list_authors():
     authors = AuthorService.get_all_authors()
     return render_template(
