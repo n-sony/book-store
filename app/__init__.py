@@ -32,10 +32,10 @@ def create_app(config_name: str) -> Flask:
         )
         app.register_blueprint(book_api_routes.api_book_bp, url_prefix="/api/v1/books/")
         app.register_blueprint(auth_api_routes.api_auth_bp, url_prefix="/api/v1/auth/")
-        app.register_blueprint(author_web_routes.web_authors_bp, url_prefix="authors")
-        app.register_blueprint(book_web_routes, url_prefix="books")
-        app.register_blueprint(auth_web_routes, url_prefix="auth")
-        app.register_blueprint(home_web_routes)
+        app.register_blueprint(author_web_routes.web_authors_bp, url_prefix="/authors")
+        app.register_blueprint(book_web_routes.web_books_bp, url_prefix="/books")
+        app.register_blueprint(auth_web_routes.web_auth_bp, url_prefix="/auth")
+        app.register_blueprint(home_web_routes.web_home_bp, url_prefix="/")
 
         if is_dev():
             db.create_all()
